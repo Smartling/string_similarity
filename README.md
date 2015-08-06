@@ -1,6 +1,6 @@
 # StringSimilarity
 
-StringSimilarity provides a very simple api to compare two strings and return a percentage similarity.
+StringSimilarity provides a very simple api to compare two strings and return a percentage similarity. It is based on the Sørensen–Dice coefficient (https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient)
 
 ## Installation
 
