@@ -1,5 +1,6 @@
 require 'string_similarity'
 require 'rspec'
+require 'pry'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -19,8 +20,6 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
-
-  config.warnings = true
 
   # Many RSpec users commonly either run the entire suite or an individual
   # file, and it's useful to allow more verbose output when running an

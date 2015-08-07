@@ -18,10 +18,21 @@ Or install it yourself as:
 
 ## Usage
 
+StringSimilarity has two methods, `bigram_score` and `ngram_score`.
+
+`bigram_score` is most useful for strings that do not have spaces in them, e.g. Japanese or Simplified Chinese text.
+
+`ngram_score` is most useful for all other languages..
+
 ```ruby
 
-StringSimilarity.score('hello', 'hello')
-#=> 100
+string_1 = 'Translation company in Boulder'
+string_2 = 'Translation company in New York'
+
+StringSimilarity.bigram_score(string_1, string_2)
+#=> 73
+StringSimilarity.ngram_score(string_1, string_2)
+#=> 74
 
 ```
 

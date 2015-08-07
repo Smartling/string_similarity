@@ -2,21 +2,29 @@ require "string_similarity/version"
 
 class StringSimilarity
 
-  MIN_BIGRAM_LENGTH = 2
-  VERIFIED_BONUS = 5
+  MIN_NGRAM_LENGTH = 2
 
-  def self.score(string_1, string_2)
+  def self.ngram_score(string_1, string_2)
+    ngram_length = (string_1.length.to_f * 0.1).round
+    ngram_length = [MIN_NGRAM_LENGTH, ngram_length].max
+    score(string_1, string_2, ngram_length)
+  end
+
+  def self.bigram_score(string_1, string_2)
+    score(string_1, string_2, MIN_NGRAM_LENGTH)
+  end
+
+  private
+
+  def self.score(string_1, string_2, ngram_length)
     string_1 = String.new(string_1)
     string_2 = String.new(string_2)
 
     cleaned_string_1 = remove_special_characters(string_1)
     cleaned_string_2 = remove_special_characters(string_2)
 
-    bigram_length = (string_1.length.to_f * 0.1).round
-    bigram_length = [MIN_BIGRAM_LENGTH, bigram_length].max
-
-    string_1_ngrams = cleaned_string_1.each_char.each_cons(bigram_length).to_set
-    string_2_ngrams = cleaned_string_2.each_char.each_cons(bigram_length).to_set
+    string_1_ngrams = cleaned_string_1.each_char.each_cons(ngram_length).to_set
+    string_2_ngrams = cleaned_string_2.each_char.each_cons(ngram_length).to_set
 
     overlap = (string_1_ngrams & string_2_ngrams).size
     total = string_1_ngrams.size + string_2_ngrams.size
@@ -27,8 +35,6 @@ class StringSimilarity
     score = (sorensen_dice * 100).round
     normalize_score(score, string_1, string_2)
   end
-
-  private
 
   def self.remove_special_characters(phrase)
     phrase.gsub!(/[[:punct:]<>]+/, "") # remove all punctuation
