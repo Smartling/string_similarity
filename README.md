@@ -22,7 +22,7 @@ StringSimilarity has two methods, `bigram_score` and `ngram_score`.
 
 `bigram_score` is most useful for strings that do not have spaces in them, e.g. Japanese or Simplified Chinese text.
 
-`ngram_score` is most useful for all other languages..
+`ngram_score` is most useful for all other languages.
 
 ```ruby
 
